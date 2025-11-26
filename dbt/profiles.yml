@@ -1,0 +1,12 @@
+analytics:
+  outputs:
+    dev:
+      dbname: analytics_db
+      host: postgres
+      pass: analytics_pass
+      port: 5432
+      schema: root
+      threads: 1
+      type: postgres
+      user: analytics_user
+  target: dev

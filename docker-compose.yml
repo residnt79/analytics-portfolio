@@ -1,0 +1,44 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: analytics_postgres
+    environment:
+      POSTGRES_USER: analytics_user
+      POSTGRES_PASSWORD: analytics_pass
+      POSTGRES_DB: analytics_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U analytics_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  dbt:
+    build: ./dbt
+    container_name: analytics_dbt
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+    - ./dbt:/usr/app/dbt
+    environment:
+      DBT_PROFILES_DIR: /usr/app/dbt
+
+  dagster:
+    build: ./dagster
+    container_name: analytics_dagster
+    depends_on:
+      - postgres
+      - dbt
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./dagster:/opt/dagster/app
+    environment:
+      DAGSTER_HOME: /opt/dagster/app
+
+volumes:
+  postgres_data:
