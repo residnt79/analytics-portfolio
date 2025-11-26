@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+venv/
+*.egg-info/
+
+# dbt
+dbt_packages/
+logs/
+target/
+.user.yml
+
+# Dagster
+dagster_home/
+
+# Docker
+*.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Postgres data (don't commit database files)
+postgres_data/
