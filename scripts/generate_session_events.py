@@ -3,7 +3,7 @@ import psycopg2
 import psycopg2.extras
 from datetime import datetime, timedelta
 import random
-import json
+import os
 import uuid
 
 fake = Faker()
@@ -15,11 +15,11 @@ REVIEW_RATE = 0.30  # 30% of purchases get reviews
 
 # Connect to Postgres
 conn = psycopg2.connect(
-    host="localhost",
-    port=5432,
-    database="analytics_db",
-    user="analytics_user",
-    password="analytics_pass"
+    host=os.getenv("POSTGRES_HOST", "localhost"),  # Fallback to localhost
+    port=os.getenv("POSTGRES_PORT", "5432"),
+    database=os.getenv("POSTGRES_DB", "analytics_db"),
+    user=os.getenv("POSTGRES_USER", "analytics_user"),
+    password=os.getenv("POSTGRES_PASSWORD", "analytics_pass")
 )
 cur = conn.cursor()
 

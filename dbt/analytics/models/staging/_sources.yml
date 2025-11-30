@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw
+    database: analytics_db
+    schema: raw
+    tables:
+      - name: login_events
+      - name: signup_events
+      - name: session_events
+      - name: orders
+      - name: order_items
+      - name: products
+      - name: order_status_events
+      - name: refund_return_events

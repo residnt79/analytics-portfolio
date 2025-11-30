@@ -17,6 +17,14 @@ target/
 dagster_home/
 dagster/history/
 
+# Dagster runtime files
+dagster/history/
+dagster/storage/
+dagster/dagster.yaml
+dagster/**/*.db
+dagster/**/*.db-shm
+dagster/**/*.db-wal
+
 # Docker
 *.env
 .env.local

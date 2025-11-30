@@ -37,8 +37,16 @@ services:
       - "3000:3000"
     volumes:
       - ./dagster:/opt/dagster/app
+      - ./scripts:/opt/dagster/app/scripts
+      - ./dbt:/opt/dagster/app/dbt
     environment:
       DAGSTER_HOME: /opt/dagster/app
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: analytics_db
+      POSTGRES_USER: analytics_user
+      POSTGRES_PASSWORD: analytics_pass
+      DBT_PROFILES_DIR: /opt/dagster/app/dbt
 
 volumes:
   postgres_data:
